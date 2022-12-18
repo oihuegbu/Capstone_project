@@ -1,0 +1,26 @@
+---
+
+- name: Creating an EC2 instance using Ansible
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    region: us-east-1
+    instance_type: t2.medium
+    ami: ami-0574da719dca65348
+    keypair: MyKP
+
+  tasks:
+
+  - name: Launching the instance
+    ec2:
+      aws_access_key: 'AKIAVMERSI2BRIHDQPSK'
+      aws_secret_key: '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'
+      key_name: "{{ keypair }}"
+      group: launch-wizard-1
+      instance_type: "{{ instance_type }}"
+      image: "{{ ami }}"
+      wait: true
+      region: "{{ region }}"
+      vpc_subnet_id: subnet-07f9d8baef520c38c
+      count: 1
